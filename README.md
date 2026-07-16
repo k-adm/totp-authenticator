@@ -11,6 +11,18 @@ access to page content).
 ![Manifest V3](https://img.shields.io/badge/Chrome-Manifest%20V3-1a73e8.svg)
 ![Network: none](https://img.shields.io/badge/network-none-success.svg)
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/popup.png" alt="Popup - live TOTP codes with countdown" width="320">
+</p>
+
+| Accounts | Import / Export | Settings |
+|:--:|:--:|:--:|
+| ![Accounts](screenshots/accounts.png) | ![Import / Export](screenshots/import-export.png) | ![Settings](screenshots/settings.png) |
+
+_Demo data - all accounts, usernames and codes above are placeholders._
+
 ## Features
 
 - **Codes in the popup** - TOTP / HOTP / Steam, a live validity timer (shrinking
