@@ -5,6 +5,7 @@ spirit of Google Authenticator. It stores TOTP / HOTP / Steam accounts, generate
 one-time codes with a live countdown, and works entirely on-device (no cloud, no
 access to page content).
 
+[![build](https://github.com/k-adm/totp-authenticator/actions/workflows/build.yml/badge.svg)](https://github.com/k-adm/totp-authenticator/actions/workflows/build.yml)
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Manifest V3](https://img.shields.io/badge/Chrome-Manifest%20V3-1a73e8.svg)
 ![Network: none](https://img.shields.io/badge/network-none-success.svg)
