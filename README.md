@@ -6,6 +6,7 @@ one-time codes with a live countdown, and works entirely on-device (no cloud, no
 access to page content).
 
 [![build](https://github.com/k-adm/totp-authenticator/actions/workflows/build.yml/badge.svg)](https://github.com/k-adm/totp-authenticator/actions/workflows/build.yml)
+[![Download](https://img.shields.io/badge/download-latest%20build-2ea44f.svg)](https://github.com/k-adm/totp-authenticator/releases/latest)
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Manifest V3](https://img.shields.io/badge/Chrome-Manifest%20V3-1a73e8.svg)
 ![Network: none](https://img.shields.io/badge/network-none-success.svg)
@@ -44,6 +45,18 @@ access to page content).
 > **Note:** without a master password, accounts are stored unencrypted in
 > `chrome.storage.local` - the same default as most authenticator apps. Enable a
 > master password for at-rest protection.
+
+## Download (prebuilt)
+
+A ready-to-use build is attached to the
+[**latest release**](https://github.com/k-adm/totp-authenticator/releases/latest)
+- direct link:
+[`totp-authenticator.zip`](https://github.com/k-adm/totp-authenticator/releases/latest/download/totp-authenticator.zip).
+Download the zip, unzip it, then in Chrome open `chrome://extensions/`, enable
+**Developer mode**, click **Load unpacked**, and select the unzipped folder.
+
+The download is rebuilt automatically on every push to `main`, so the link always
+points at the current build.
 
 ## Install (from source)
 

@@ -1,0 +1,48 @@
+name: release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-latest
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Package built extension
+        id: pkg
+        run: |
+          name=$(node -p "require('./package.json').name")
+          version=$(node -p "require('./public/manifest.json').version")
+          zip="${name}.zip"
+          (cd dist && zip -qr "../${zip}" .)
+          echo "zip=${zip}" >> "$GITHUB_OUTPUT"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+      - name: Publish rolling "latest" release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes="Prebuilt Chrome extension (Manifest V3) - rolling build of the latest \`main\`.
+
+          - version \`${{ steps.pkg.outputs.version }}\` - commit \`${GITHUB_SHA:0:7}\`
+
+          **Install:** download \`${{ steps.pkg.outputs.zip }}\`, unzip, then open \`chrome://extensions\`, enable **Developer mode**, click **Load unpacked**, and select the unzipped folder."
+          gh release delete latest --yes --cleanup-tag 2>/dev/null || true
+          gh release create latest "${{ steps.pkg.outputs.zip }}" \
+            --title "Latest build (v${{ steps.pkg.outputs.version }})" \
+            --notes "$notes" \
+            --latest
