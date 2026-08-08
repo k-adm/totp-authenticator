@@ -18,3 +18,27 @@
 *.jpeg binary
 *.zip  binary
 *.crx  binary
+
+# Публичное зеркало
+# Единственный источник истины о том, чего НЕ должно быть в ветке public, а значит
+# и в публичном репозитории на GitHub. Список читает .forgejo/workflows/mirror-public.yml.
+# Проверить локально, что именно уедет:  git archive main | tar -t
+#
+# Ведущая косая якорит к корню репозитория. Хвостовой косой нет намеренно -
+# замерено на git 2.54 в изолированной репе 08.08.2026:
+#   /docs  и  docs   -> git check-attr export-ignore -- docs  показывает `set`
+#   docs/            -> показывает `unspecified`, но git archive каталог всё равно
+#                       исключает (обращается к атрибуту по своей внутренней форме пути)
+# То есть форма с хвостовой косой работает, но не проверяема штатным check-attr,
+# а gitattributes(5) прямо называет её pointless - опираться на неё значит опираться
+# на неоговорённое поведение. Берём форму, которую видно инструментом.
+#
+# Во всех трёх формах атрибут НЕ выставляется на файлы внутри каталога: git archive
+# не спускается в исключённый каталог целиком. Поэтому проверять надо вывод archive,
+# а не check-attr на отдельном файле.
+/CLAUDE.md      export-ignore
+/sync.sh        export-ignore
+/docs           export-ignore
+/handoff        export-ignore
+/store-assets   export-ignore
+/.forgejo       export-ignore
