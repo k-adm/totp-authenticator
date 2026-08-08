@@ -29,8 +29,7 @@ implementation/test-output/
 build_error.log
 tsconfig.tsbuildinfo
 
-# Internal / local-only (kept on disk, excluded from the public mirror)
-CLAUDE.md
-sync.sh
-docs/
-handoff/
+# Внутренние пути больше не прячутся от git. Forgejo держит полное содержимое,
+# а в публичную репу на GitHub они не попадают за счёт export-ignore в .gitattributes:
+# ветку public собирает .forgejo/workflows/mirror-public.yml, вычищая их из дерева.
+# Список вычищаемого - в .gitattributes, он же единственный источник истины.
